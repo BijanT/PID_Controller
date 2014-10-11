@@ -7,16 +7,16 @@ PIDController::PIDController(double proportionalGain, double integralGain, doubl
 	Ki = integralGain;
 	Kd = derivativeGain;
 	
-	//Set desiredLoc, integral and lastError to zero
-	desiredLoc = 0;
+	//Set setPoint, integral and lastError to zero
+	setpoint = 0;
 	integral = 0;
 	lastError = 0;
 }
 
-void PIDController::SetDesireLoc(double loc)
+void PIDController::NewSetpoint(double sp)
 {
-	//Set desiredLoc to the new desired location
-	desiredLoc = loc;
+	//Set setPoint to the new desired location
+	setpoint = sp;
 	
 	//Reset the integral and lastError values
 	integral = 0;
@@ -31,7 +31,7 @@ double PIDController::CalculateOutput(double currentLoc)
 	double output;
 	
 	//Calculate the error
-	error = desiredLoc - currentLoc;
+	error = setpoint - currentLoc;
 	
 	//Calculate the derivative
 	derivative = (error - lastError)
